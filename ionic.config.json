@@ -1,0 +1,7 @@
+{
+  "name": "talisma-web-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
