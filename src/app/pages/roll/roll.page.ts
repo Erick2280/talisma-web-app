@@ -17,7 +17,7 @@ import axios from 'axios';
 })
 export class RollPage implements OnInit {
 
-  inputValue: number = 0;
+  inputValue: number = 50;
   lastRoll: any = 0;
   CurrentStatus = CurrentStatus;
   status: CurrentStatus = CurrentStatus.Ready;
@@ -46,7 +46,6 @@ export class RollPage implements OnInit {
         this.lastRoll = "!!!";
         console.log('Não foi possível identificar o valor do dado');
       }
-      this.performRoll()
     } catch (error) {
       console.error('Error occurred:', error);
     }
@@ -58,7 +57,7 @@ export class RollPage implements OnInit {
   }
 
   private async fetchWebcamData(): Promise<{ result: string }> {
-    const url: string = 'http://127.0.0.1:5001/webcam';
+    const url: string = `http://127.0.0.1:5001/webcam?number=${this.inputValue}`;
     try {
         const response = await axios.get<{ result: string }>(url);
         this.status = CurrentStatus.Ready;
