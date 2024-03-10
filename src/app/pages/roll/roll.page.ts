@@ -21,12 +21,13 @@ export class RollPage implements OnInit {
   lastRoll: any = 0;
   CurrentStatus = CurrentStatus;
   status: CurrentStatus = CurrentStatus.Ready;
+  address: string = '';
   constructor(private storageService: StorageService) {
     addIcons({ arrowUpCircle, arrowDownCircle, dice });
   }
 
   ngOnInit() {
-
+    this.storageService.get('address').then(address => this.address = address);
   }
 
   startMove() {
@@ -57,7 +58,7 @@ export class RollPage implements OnInit {
   }
 
   private async fetchWebcamData(): Promise<{ result: string }> {
-    const url: string = `http://127.0.0.1:5001/webcam?number=${this.inputValue}`;
+    const url: string = `http://${this.address}/webcam?number=${this.inputValue}`;
     try {
         const response = await axios.get<{ result: string }>(url);
         this.status = CurrentStatus.Ready;

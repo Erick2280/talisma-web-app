@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TopBarComponent } from 'src/app/components/top-bar/top-bar.component';
 import { NavController } from '@ionic/angular';
 import { IonButton, IonContent, IonInput } from '@ionic/angular/standalone';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-prepare',
@@ -14,12 +15,15 @@ import { IonButton, IonContent, IonInput } from '@ionic/angular/standalone';
 })
 export class PreparePage implements OnInit {
 
-  constructor(private navController: NavController) { }
+  address: string = '';
+
+  constructor(private navController: NavController, private storageService: StorageService) { }
 
   ngOnInit() {
   }
 
-  commitAddress() {
+  async commitAddress() {
+    await this.storageService.set('address', this.address);
     this.navController.navigateForward('/roll');
   }
 
