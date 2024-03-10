@@ -1,0 +1,35 @@
+<ion-content>
+  <div class="centered-container">    
+    <app-top-bar path="/prepare">
+      Lançar o dado
+    </app-top-bar>  
+
+    <div class="controls-container ion-margin-horizontal">
+      <div class="left-handle">
+        <div class="dice-indicator ion-padding-horizontal" *ngIf="status !== CurrentStatus.Rolling">
+          <h2>{{ lastRoll }}</h2>
+          <p>Última jogada</p>
+        </div>
+        <div class="dice-indicator ion-padding-horizontal" *ngIf="status === CurrentStatus.Rolling">
+          <ion-spinner name="circles"></ion-spinner>
+          <p>Última jogada: <strong>{{ lastRoll }}</strong></p>
+        </div>
+        <div class="ion-padding" *ngIf="status === CurrentStatus.Ready">
+          <ion-icon class="ion-padding-top" name="arrow-up-circle" color="light" size="large"></ion-icon>
+          <p class="ion-no-margin help-text">Arraste o dedo na trilha para cima e não solte para começar.</p>
+        </div>
+        <div class="ion-padding" *ngIf="status === CurrentStatus.Dragging">
+          <ion-icon class="ion-padding-top" name="arrow-down-circle" color="light" size="large"></ion-icon>
+          <p class="ion-no-margin help-text pink-text">Solte o dedo para rolar o dado.</p>
+        </div>
+        <div class="ion-padding" *ngIf="status === CurrentStatus.Rolling">
+          <ion-icon class="ion-padding-top" name="dice" color="light" size="large"></ion-icon>
+          <p class="ion-no-margin help-text">O dado está rolando. A sorte foi lançada!</p>
+        </div>
+      </div>
+      <div class="input-wrapper">
+        <input class="input-range" type="range" [(ngModel)]="inputValue" (touchstart)="startMove()" (touchend)="endMove()" (mousedown)="startMove()" (mouseup)="endMove()">
+      </div>
+    </div>
+  </div>
+</ion-content>

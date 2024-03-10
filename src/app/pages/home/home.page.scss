@@ -1,0 +1,87 @@
+.app-logo {
+  height: 2em;
+  margin-top: 0.125em;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.button-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 156px;
+  padding: 24px;
+  box-shadow: 0px 4px 21.1px rgba(0, 0, 0, 0.125);
+  border-radius: 32px;
+  text-align: left;
+  width: calc(50% - 8px);
+  z-index: 0;
+}
+
+.button-card.button-card-primary {
+  justify-content: center;
+  background: linear-gradient(296.43deg, #5934BE 32.13%, #533BEB 83.66%);
+  width: 100%;
+  color: white;
+}
+
+.icon-container {
+  width: 32px;
+  height: 32px;
+}
+
+.button-card-primary.button-card h2 {
+  font-size: 2em;
+}
+
+.button-card h2 {
+  font-weight: 800;
+  font-size: 1.5em;
+  margin: 0;
+  padding-top: 0.25em;
+}
+
+.button-card p {
+  font-size: 1em;
+  padding-top: 0.5em;
+  margin: 0;
+  opacity: 0.75;
+}
+
+.button-card-pink .floating-artwork, .button-card-blue .floating-artwork, .button-card-purple .floating-artwork {
+  width: 128px;
+  position: absolute;
+  left: -24px;
+  top: -32px;
+  z-index: -1;
+}
+
+.button-card-primary .floating-artwork {
+  width: 128px;
+  position: absolute;
+  right: -32px;
+  z-index: -1;
+}
+
+.button-card-blue {
+  background-color: var(--ion-color-tertiary);
+  color: white;
+}
+
+.button-card-pink {
+  background-color: var(--ion-color-secondary);
+  color: var(--ion-background-color)
+}
+
+.button-card-purple {
+  background-color: var(--ion-color-primary);
+  color: white;
+}

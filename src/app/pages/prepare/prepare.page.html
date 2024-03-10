@@ -1,0 +1,19 @@
+<ion-content>
+  <div class="centered-container">    
+    <app-top-bar>
+      Lançar o dado
+    </app-top-bar>
+    <div class="question-container">
+      <div>
+      <p class="ion-margin-horizontal major-text">Qual o endereço da API de controle?</p>
+      <div class="ion-margin-horizontal">
+        <ion-input color="secondary" label="Endereço da API" label-placement="floating" fill="outline" placeholder="http://192.168.0.1/"></ion-input>
+      </div>
+      <p class="ion-margin-horizontal minor-text"><strong>Antes de começar, certifique-se de que o dado está posicionado corretamente.</strong> O dado precisa estar diretamente à frente da aba conectada ao servomotor.</p>
+      </div>
+      <div>
+        <ion-button (click)="commitAddress()" class="ion-margin-horizontal" fill="solid" size="large" expand="block">Continuar</ion-button>
+      </div>
+    </div>  
+  </div>
+</ion-content>

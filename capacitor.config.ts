@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'talisma-web-app',
+  appId: 'dev.riso.talisma',
+  appName: 'Talismã',
   webDir: 'www',
   server: {
     androidScheme: 'https'
