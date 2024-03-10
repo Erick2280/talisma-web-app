@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage-angular';
 export class StorageService {
   private store: Storage | null = null;
   private initialization: Promise<void>;
+  private history: Array<{ value: number, time: Date }> = [];
 
   constructor(private storage: Storage) {
     this.initialization = this.initialize();
@@ -14,6 +15,10 @@ export class StorageService {
 
   async initialize() {
     const store = await this.storage.create();
+    const history = await store.get('history');
+    if (history) {
+      this.history = history;
+    }
     this.store = store;
   }
 
@@ -35,5 +40,10 @@ export class StorageService {
   async clear() {
     await this.initialization;
     return this.store!.clear();
+  }
+  
+  appendToArray(element: { value: number, time: Date}) {
+    this.history.push(element);
+    this.set('history', this.history);
   }
 }

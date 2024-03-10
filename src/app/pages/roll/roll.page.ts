@@ -5,6 +5,7 @@ import { TopBarComponent } from 'src/app/components/top-bar/top-bar.component';
 import { IonContent, IonIcon, IonText, IonSpinner } from "@ionic/angular/standalone";
 import { addIcons } from 'ionicons';
 import { dice, arrowUpCircle, arrowDownCircle } from 'ionicons/icons';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-roll',
@@ -20,11 +21,12 @@ export class RollPage implements OnInit {
   CurrentStatus = CurrentStatus;
   status: CurrentStatus = CurrentStatus.Ready;
 
-  constructor() {
+  constructor(private storageService: StorageService) {
     addIcons({ arrowUpCircle, arrowDownCircle, dice });
   }
 
   ngOnInit() {
+
   }
 
   startMove() {
@@ -39,6 +41,8 @@ export class RollPage implements OnInit {
 
   performRoll() {
     console.log('performRoll');
+    // Adiciona no histórico
+    this.storageService.appendToArray({ value: this.lastRoll, time: new Date() });
   }
 }
 

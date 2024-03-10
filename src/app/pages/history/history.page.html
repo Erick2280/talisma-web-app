@@ -2,6 +2,15 @@
   <div class="centered-container">    
     <app-top-bar>
       Histórico
-    </app-top-bar>  
+    </app-top-bar> 
+
+    <ion-list>
+      <ion-item *ngFor="let entry of history">
+        <ion-label>
+          <h1>{{ entry.value }}</h1>
+          <p>{{ entry.time.toLocaleString() }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>

@@ -27,7 +27,7 @@
           <p class="ion-no-margin help-text">O dado está rolando. A sorte foi lançada!</p>
         </div>
       </div>
-      <div class="input-wrapper">
+      <div class="input-wrapper" *ngIf="status !== CurrentStatus.Rolling">
         <input class="input-range" type="range" [(ngModel)]="inputValue" (touchstart)="startMove()" (touchend)="endMove()" (mousedown)="startMove()" (mouseup)="endMove()">
       </div>
     </div>
