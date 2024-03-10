@@ -6,6 +6,7 @@ import { IonContent, IonIcon, IonText, IonSpinner } from "@ionic/angular/standal
 import { addIcons } from 'ionicons';
 import { dice, arrowUpCircle, arrowDownCircle } from 'ionicons/icons';
 import { StorageService } from 'src/app/services/storage.service';
+import axios from 'axios';
 
 @Component({
   selector: 'app-roll',
@@ -17,10 +18,9 @@ import { StorageService } from 'src/app/services/storage.service';
 export class RollPage implements OnInit {
 
   inputValue: number = 0;
-  lastRoll: number = 6;
+  lastRoll: any = 0;
   CurrentStatus = CurrentStatus;
   status: CurrentStatus = CurrentStatus.Ready;
-
   constructor(private storageService: StorageService) {
     addIcons({ arrowUpCircle, arrowDownCircle, dice });
   }
@@ -32,17 +32,41 @@ export class RollPage implements OnInit {
   startMove() {
     this.status = CurrentStatus.Dragging;
   }
-
-  endMove() {
-    this.performRoll();
-    this.inputValue = 0;
+  async endMove() {
     this.status = CurrentStatus.Rolling;
+    try {
+      const { result } = await this.fetchWebcamData();
+      const parsedResult = parseInt(result);
+      if (!isNaN(parsedResult)) {
+        this.lastRoll = parsedResult;
+        this.performRoll();
+        this.inputValue = 0;
+        this.status = CurrentStatus.Ready;
+      } else {
+        this.lastRoll = "!!!";
+        console.log('Não foi possível identificar o valor do dado');
+      }
+      this.performRoll()
+    } catch (error) {
+      console.error('Error occurred:', error);
+    }
   }
 
   performRoll() {
     console.log('performRoll');
-    // Adiciona no histórico
     this.storageService.appendToArray({ value: this.lastRoll, time: new Date() });
+  }
+
+  private async fetchWebcamData(): Promise<{ result: string }> {
+    const url: string = 'http://127.0.0.1:5001/webcam';
+    try {
+        const response = await axios.get<{ result: string }>(url);
+        this.status = CurrentStatus.Ready;
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching webcam data from ${url}:`, error);
+        throw error; 
+    }
   }
 }
 
